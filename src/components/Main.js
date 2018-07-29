@@ -12,6 +12,7 @@ export class Main extends React.Component{
 
         <Switch>
           <Route exact path="/" component={Login}/>
+          <Route path="/home" component={Home}/>
           <Route path="/login" component={Login}/>
           <Route path="/register" component={Register}/>
           <Route component={Login}/>
