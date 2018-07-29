@@ -1,5 +1,7 @@
 import React from 'react';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, message} from 'antd';
+import $ from 'jquery';
+import {API_ROOT} from "./constants";
 
 const FormItem = Form.Item;
 
@@ -15,6 +17,21 @@ class RegistrationForm extends React.Component {
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
+        $.ajax({
+          url: `${API_ROOT}/signup`,
+          method: 'POST',
+          data: JSON.stringify({
+            username: values.username,
+            password: values.password,
+          }),
+
+        }).then((response) => {
+          message.success(response);
+        }, (error) => {
+          message.error(error.responseText);
+        }).catch((e)=>{
+          console.log(e);
+        });
       }
     });
   }
