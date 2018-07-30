@@ -27,6 +27,7 @@ class RegistrationForm extends React.Component {
 
         }).then((response) => {
           message.success(response);
+          this.props.history.push('/login');//history points to BrowserRouter in index.js, can be treated as a singleton managed by Browser Router
         }, (error) => {
           message.error(error.responseText);
         }).catch((e)=>{
