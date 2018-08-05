@@ -15,7 +15,7 @@ export class Main extends React.Component{
       <div>
 
         <Switch>
-          <Route exact path="/" reder={this.getLogin}/>
+          <Route exact path="/" render={this.getLogin}/>
           <Route path="/home" component={Home}/>
           <Route path="/login" render={this.getLogin}/>
           <Route path="/register" component={Register}/>
