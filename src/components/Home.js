@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tabs, Button } from 'antd';
+import { Tabs, Button, Spin } from 'antd';
 import {GEO_LOCATION} from "../constants"
 
 
@@ -42,7 +42,9 @@ export class Home extends React.Component {
     return (
       <div className="main-tabs">
         <Tabs tabBarExtraContent={operations}>
-          <TabPane tab="Posts" key="1">{this.state.loadingGeoLocation? "loading geolocation" : ""}</TabPane>
+          <TabPane tab="Posts" key="1">
+            {this.state.loadingGeoLocation? <Spin tip="loading geo location..."/> : ""}
+            </TabPane>
           <TabPane tab="Map" key="2">Content of tab 2</TabPane>
 
         </Tabs>
