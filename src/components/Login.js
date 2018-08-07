@@ -60,3 +60,8 @@ class NormalLoginForm extends React.Component {
 }
 
 export const Login = Form.create()(NormalLoginForm);
+
+/*Login = enhanced(NormalLoginForm), the reference of the Login form
+ will be the form prop in the props so that the NormalLoginForm can access the
+ Login Form.
+ */

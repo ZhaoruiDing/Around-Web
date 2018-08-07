@@ -36,7 +36,7 @@ export class Home extends React.Component {
     this.setState({loadingGeoLocation: false, error: '' });
     const {latitude, longitude} = position.coords;
     localStorage.setItem(POS_KEY, JSON.stringify({lat: latitude, lon: longitude}));
-    this.loadNearByPost();
+    this.loadNearByPosts();
     console.log(position);
   }
 
@@ -69,7 +69,7 @@ export class Home extends React.Component {
     }
   }
 
-  loadNearByPost = ()=>{
+  loadNearByPosts = ()=>{
    // const {lat, lon} = JSON.parse(localStorage.getItem(POS_KEY));
     const lat = 37.5357;
     const lon = -122.2695;
@@ -90,7 +90,7 @@ export class Home extends React.Component {
     });
   }
   render() {
-    const operations = <CreatePostButton/>;
+    const operations = <CreatePostButton loadNearByPosts={this.loadNearByPosts}/>;
     return (
       <Tabs tabBarExtraContent={operations} className="main-tabs">
         <TabPane tab="Posts" key="1">
