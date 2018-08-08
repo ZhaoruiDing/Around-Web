@@ -14,10 +14,10 @@ export class AroundMarker extends React.Component{
   }
 
   render(){
-    const {location} = this.props;
+    const {location} = this.props.post;
     return (
       <Marker
-        position={location}
+        position={{lat: location.lat, lng: location.lon}}
         onClick={this.onToggleOpen}
       >
         {this.state.isOpen ?
