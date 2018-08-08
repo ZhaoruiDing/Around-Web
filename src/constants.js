@@ -9,3 +9,4 @@ export const GEO_LOCATION = {
 export const POS_KEY = 'POS_KEY';
 export const AUTH_PREFIX = 'Bearer';
 export const GOOGLE_MAP_API_KEY = 'AIzaSyBbJuJjFb4nZd3TsMQuQtxZBWkzAYzH_3k';
+export const LOC_SHAKE = 0.02;
