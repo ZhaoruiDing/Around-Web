@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tabs, Button, Spin } from 'antd';
+import { Tabs, Spin } from 'antd';
 import {GEO_LOCATION, POS_KEY, API_ROOT, TOKEN_KEY, AUTH_PREFIX} from "../constants";
 import $ from 'jquery';
 import { Gallery } from './Gallery';
@@ -70,18 +70,18 @@ export class Home extends React.Component {
     }
   }
 
-  loadNearByPosts = ()=>{
-   // const {lat, lon} = JSON.parse(localStorage.getItem(POS_KEY));
-    const lat = 37.5357;
-    const lon = -122.2695;
+  loadNearByPosts = (location, range)=>{
+    this.setState({ loadingPosts: true, error: '' });
+    const {lat, lon} = location? location : JSON.parse(localStorage.getItem(POS_KEY));
+    const radius = range? range : 20;
     $.ajax({
-      url: `${API_ROOT}/search?lat=${lat}&lon=${lon}&range=20000`,
+      url: `${API_ROOT}/search?lat=${lat}&lon=${lon}&${radius}`,
       method: 'GET',
       headers:{
         Authorization: `${AUTH_PREFIX} ${localStorage.getItem(TOKEN_KEY)}`
       },
     }).then((response)=>{
-      this.setState({ posts: response, loadingPosts: false, error: '' });
+      this.setState({ posts: response || [], loadingPosts: false, error: '' });
       console.log(response);
     }, (error)=>{
       this.setState({ loadingPosts: false, error: error.responseText });
@@ -101,9 +101,10 @@ export class Home extends React.Component {
           <WrappedAroundMap
             googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbJuJjFb4nZd3TsMQuQtxZBWkzAYzH_3k&v=3.exp&libraries=geometry,drawing,places"
             loadingElement={<div style={{ height: `100%` }} />}
-            containerElement={<div style={{ height: `400px` }} />}
+            containerElement={<div style={{ height: `800px` }} />}
             mapElement={<div style={{ height: `100%` }} />}
-            posts={this.state.posts}
+            posts={this.state.posts || []}
+            loadNearByPosts={this.loadNearByPosts}
           />
         </TabPane>
       </Tabs>
@@ -111,3 +112,6 @@ export class Home extends React.Component {
 
   }
 }
+
+
+//React Element Tree ====> Component Render ====> diff (VDOM1, VDOM2) ====> React =====> DOM ====> browser
